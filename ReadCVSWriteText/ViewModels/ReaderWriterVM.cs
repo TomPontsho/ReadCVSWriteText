@@ -1,4 +1,5 @@
-﻿using ReadCVSWriteText.Models;
+﻿using Microsoft.Win32;
+using ReadCVSWriteText.Models;
 using ReadCVSWriteText.Services;
 using ReadCVSWriteText.Services.Logging;
 using System;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace ReadCVSWriteText.ViewModels {
@@ -24,7 +26,7 @@ namespace ReadCVSWriteText.ViewModels {
         #endregion // Private members
 
         #region Public members
-        private String _inCSVFile = "./Resources/data.cvs";
+        private String _inCSVFile = @"C:\Users\TMaheso\Documents\Visual Studio 2015\Projects\ReadCVSWriteText\ReadCVSWriteTextTests\bin\Debug\Resources\data.csv";
         public String inCSVFile {
             get { return _inCSVFile; }
             set {
@@ -34,7 +36,7 @@ namespace ReadCVSWriteText.ViewModels {
                 }
             }
         }
-        private String _outDir = "";
+        private String _outDir = @".\Resources\";
         public String outDir {
             get { return _outDir; }
             set {
@@ -54,7 +56,7 @@ namespace ReadCVSWriteText.ViewModels {
                 }
             }
         }
-        private String _outFileAddresses = "addresses.tex";
+        private String _outFileAddresses = "addresses.txt";
         public String outFileAddresses {
             get { return _outFileAddresses; }
             set {
@@ -64,7 +66,7 @@ namespace ReadCVSWriteText.ViewModels {
                 }
             }
         }
-        private String _readOutCome = "";
+        private String _readOutCome = "Nothing read";
         public String readOutCome {
             get { return _readOutCome; }
             set {
@@ -92,18 +94,84 @@ namespace ReadCVSWriteText.ViewModels {
         #endregion // Public members
 
         #region Commnads handlers
-        private void onSelectInputCSV() {
+        public void onSelectInputCSV() {
 
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
+            fileDialog.Multiselect = false;
+            fileDialog.InitialDirectory = outDir;
+
+            fileDialog.DefaultExt = ".csv";
+            fileDialog.Filter = "CSV File |*.csv";
+
+            bool? browseResult = fileDialog.ShowDialog();
+
+            if (browseResult != null && browseResult == true) {
+
+                if (File.Exists(fileDialog.FileName)) {
+
+                    inCSVFile = fileDialog.FileName;
+                    outDir = Path.GetDirectoryName(_inCSVFile) + "\\";
+                }
+            }
+            else {
+                Logger.instance.log("ReaderWriterVM - No file selected.", Category.Warn, Priority.Low);
+            }
         }
 
-        private void onSelectOutputDir() {
+        public void onSelectOutputDir() {
 
+            using (var folderDialog = new FolderBrowserDialog()) { 
+
+                DialogResult browseResult = folderDialog.ShowDialog();
+
+                if (browseResult == DialogResult.OK && 
+                    !string.IsNullOrWhiteSpace(folderDialog.SelectedPath)) {
+
+                    outDir = folderDialog.SelectedPath;
+                }
+                else {
+                    Logger.instance.log("ReaderWriterVM - Out put folder not selected.", Category.Warn, Priority.Low);
+                }
+            }
         }
 
-        private void onRunApp() {
+        public void onRunApp() {
+
+            try {
+                // Read the CSV file
+                IEnumerable<Person> people = _reader.readFromCSV(_inCSVFile);
+                // Store data in a model
+                _peopleData.add(people);
+
+                // Get ordered by Frequency descendin and name ascending
+                String freqNames = _peopleData.analyze(PeopleAnalyzer.freq9to0NamesZtoA);
+                // Write freq9to0NamesZtoA to file
+                _writer.writeToFile(_outDir + "\\" + _outFileNames, freqNames);
+
+                // Get ordered by address ascending
+                String addresses = _peopleData.analyze(PeopleAnalyzer.addressAtoZ0to9);
+                // Write addressAtoZ0to9 to file
+                _writer.writeToFile(_outDir + "\\" + _outFileAddresses, addresses);
+
+                // Log success
+                Logger.instance.log("ReaderWriterVM - Successfully loaded: '" + inCSVFile + "'.", 
+                    Category.Info, Priority.Low);
+
+                // Add to list of loaded files
+                loadedFiles.Add(Path.GetFileName(_inCSVFile));
+
+                // Update read status
+                readOutCome = "Success!";
+            }
+            catch (Exception e) {
+
+                // Log exception
+                Logger.instance.log("ReaderWriterVM - For file: '" + inCSVFile + "'. " + e.StackTrace,
+                    Category.Exception, Priority.Medium);
+            }
 
         }
-        private bool canRunApp() {
+        public bool canRunApp() {
 
             return File.Exists(inCSVFile) && Directory.Exists(outDir) &&
                 !String.IsNullOrEmpty(outFileNames) && !String.IsNullOrEmpty(outFileAddresses);

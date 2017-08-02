@@ -58,6 +58,7 @@
     <Compile Include="Models\ReadPeopleDataTests.cs" />
     <Compile Include="Models\WritePeopleDataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ReaderWriterVMTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReadCVSWriteText\ReadCVSWriteText.csproj">

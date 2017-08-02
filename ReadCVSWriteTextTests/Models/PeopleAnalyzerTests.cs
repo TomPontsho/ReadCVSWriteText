@@ -13,65 +13,84 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void freq9to0NamesZtoATest() {
 
-            String name = "Pontsho";
-            String surname = "Maheso";
-            Address address = new Address("184 Van Der Valt St");
+            String name = "Matt";
+            String surname = "Brown";
+            Address address = new Address("31 Clifton Rd");
             String phoneNumber = "0115986474";
             Person person1 = new Person(name, surname, address, phoneNumber);
 
             Person person2 = new Person(name, surname, address, phoneNumber) {
-                name = "Tom",
-                surname = "Maheso",
-                addressHouseStreet = "321 Woodland St",
+                name = "Heinrich",
+                surname = "Jones",
+                addressHouseStreet = "12 Acton St",
                 phoneNumber = "98563247"
             };
 
             Person person3 = new Person(name, surname, address, phoneNumber) {
-                name = "Thabo",
-                surname = "Pontsho",
-                address = new Address("21 3rd Street"),
+                name = "Johnson",
+                surname = "Smith",
+                address = new Address("22 Jones Rd"),
                 phoneNumber = "089248753"
             };
 
-            PeopleData peopleData = new PeopleData(new List<Person> { person1, person2, person3 });
+            Person person4 = new Person(name, surname, address, phoneNumber) {
+                name = "Tim",
+                surname = "Johnson",
+                address = new Address("65 Brown Rd"),
+                phoneNumber = "013586445"
+            };
 
-            String outText = peopleData.analyze(PeopleAnalyzer.freq9to0NamesZtoA);
+            String expected = "Johnson, 2" + Environment.NewLine +
+                               "Brown, 1" + Environment.NewLine +
+                               "Heinrich, 1" + Environment.NewLine +
+                               "Jones, 1" + Environment.NewLine +
+                               "Matt, 1" + Environment.NewLine +
+                               "Smith, 1" + Environment.NewLine +
+                               "Tim, 1" + Environment.NewLine;
 
-            Logger.instance.log(outText, Category.Debug, Priority.Low);
+            String actual = PeopleAnalyzer.freq9to0NamesZtoA(new List<Person> { person1, person2, person3, person4 });
 
-            Assert.IsNotNull(outText);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
         public void addressAtoZTest() {
 
-            String name = "Pontsho";
-            String surname = "Maheso";
-            Address address = new Address("184 Van Der Valt St");
+            String name = "Matt";
+            String surname = "Brown";
+            Address address = new Address("31 Clifton Rd");
             String phoneNumber = "0115986474";
             Person person1 = new Person(name, surname, address, phoneNumber);
 
             Person person2 = new Person(name, surname, address, phoneNumber) {
-                name = "Tom",
-                surname = "Maheso",
-                addressHouseStreet = "321 Woodland St",
+                name = "Heinrich",
+                surname = "Jones",
+                addressHouseStreet = "12 Acton St",
                 phoneNumber = "98563247"
             };
 
             Person person3 = new Person(name, surname, address, phoneNumber) {
-                name = "Thabo",
-                surname = "Pontsho",
-                address = new Address("21 3rd Street"),
+                name = "Johnson",
+                surname = "Smith",
+                address = new Address("22 Jones Rd"),
                 phoneNumber = "089248753"
             };
 
-            PeopleData peopleData = new PeopleData(new List<Person> { person1, person2, person3 });
+            Person person4 = new Person(name, surname, address, phoneNumber) {
+                name = "Tim",
+                surname = "Johnson",
+                address = new Address("65 Brown Rd"),
+                phoneNumber = "013586445"
+            };
 
-            String outText = peopleData.analyze(PeopleAnalyzer.addressAtoZ0to9);
+            String expected = "12 Acton St" + Environment.NewLine +
+                              "65 Brown Rd" + Environment.NewLine +
+                              "31 Clifton Rd" + Environment.NewLine +
+                              "22 Jones Rd" + Environment.NewLine;
 
-            Logger.instance.log(outText, Category.Debug, Priority.Low);
+            String actual = PeopleAnalyzer.addressAtoZ0to9(new List<Person> { person1, person2, person3, person4 });
 
-            Assert.IsNotNull(outText);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

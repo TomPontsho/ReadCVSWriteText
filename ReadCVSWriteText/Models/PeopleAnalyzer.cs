@@ -29,10 +29,10 @@ namespace ReadCVSWriteText.Models {
                     dictionary.Add(p.surname, 1);
             }
 
-            dictionary.OrderBy(freq => freq.Value).ThenByDescending(name => name.Value);
+            var ordered = dictionary.OrderByDescending(freq => freq.Value).ThenBy(name => name.Key);
 
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var kv in dictionary)
+            foreach (var kv in ordered)
                 stringBuilder.Append(kv.Key + ", " + kv.Value.ToString() + Environment.NewLine);
 
             return stringBuilder.ToString();
@@ -51,10 +51,10 @@ namespace ReadCVSWriteText.Models {
                 addresses.Add(p.address);
 
             // Street names with numbers last
-            addresses.OrderBy(addr => addr.streetName);
+            var ordered = addresses.OrderBy(addr => addr.streetName);
 
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var addr in addresses)
+            foreach (var addr in ordered)
                 stringBuilder.Append(addr.houseStreet + Environment.NewLine);
 
             return stringBuilder.ToString();

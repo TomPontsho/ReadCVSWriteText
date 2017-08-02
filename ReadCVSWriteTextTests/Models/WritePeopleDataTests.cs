@@ -14,7 +14,7 @@ namespace ReadCVSWriteText.Models.Tests {
         public void writeToFileTest() {
 
             WritePeopleData writer = new WritePeopleData();
-            string fileName = @"./Resources/testFile.txt";
+            string fileName = @".\Resources\testFile.txt";
             writer.writeToFile(fileName, "This is just a test file.");
 
             Assert.IsTrue(File.Exists(fileName));
