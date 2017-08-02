@@ -16,7 +16,13 @@ namespace ReadCVSWriteText.ViewModels {
     public class ReaderWriterVM : BindableVM {
 
         #region Constructor
-        public ReaderWriterVM() { }
+        public ReaderWriterVM() {
+
+            String currDir = Directory.GetCurrentDirectory();
+
+            outDir = currDir + @"\Resources";
+            inCSVFile = outDir + @"\data.csv";
+        }
         #endregion // Constructor
 
         #region Private members
@@ -28,7 +34,7 @@ namespace ReadCVSWriteText.ViewModels {
         #region Public members
         public static readonly string NAMINGINVALIDCHARS = "/:*?<>|\\\"";
 
-        private String _inCSVFile = @"C:\Users\TMaheso\Documents\Visual Studio 2015\Projects\ReadCVSWriteText\ReadCVSWriteTextTests\bin\Debug\Resources\data.csv";
+        private String _inCSVFile = "";
         public String inCSVFile {
             get { return _inCSVFile; }
             set {
@@ -38,7 +44,7 @@ namespace ReadCVSWriteText.ViewModels {
                 }
             }
         }
-        private String _outDir = @".\Resources\";
+        private String _outDir = "";
         public String outDir {
             get { return _outDir; }
             set {
@@ -68,13 +74,13 @@ namespace ReadCVSWriteText.ViewModels {
                 }
             }
         }
-        private String _readOutCome = "Nothing read";
-        public String readOutCome {
-            get { return _readOutCome; }
+        private String _status = "Click Run App!";
+        public String status {
+            get { return _status; }
             set {
-                if (_readOutCome != value) {
-                    _readOutCome = value;
-                    onPropertyChanged(nameof(readOutCome));
+                if (_status != value) {
+                    _status = value;
+                    onPropertyChanged(nameof(status));
                 }
             }
         }
@@ -88,10 +94,26 @@ namespace ReadCVSWriteText.ViewModels {
                 }
             }
         }
-        public ObservableCollection<String> logs {
-            get { return Logger.instance.logs; }
-            private set {}
-            
+
+        private String _freq9to0NamesAtoZ = "";
+        public String freq9to0NamesAtoZ {
+            get { return _freq9to0NamesAtoZ; }
+            set {
+                if (_freq9to0NamesAtoZ != value) {
+                    _freq9to0NamesAtoZ = value;
+                    onPropertyChanged(nameof(freq9to0NamesAtoZ));
+                }
+            }
+        }
+        private String _addressAtoZ0to9 = "";
+        public String addressAtoZ0to9 {
+            get { return _addressAtoZ0to9; }
+            set {
+                if (_addressAtoZ0to9 != value) {
+                    _addressAtoZ0to9 = value;
+                    onPropertyChanged(nameof(addressAtoZ0to9));
+                }
+            }
         }
         #endregion // Public members
 
@@ -101,6 +123,10 @@ namespace ReadCVSWriteText.ViewModels {
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Multiselect = false;
             fileDialog.InitialDirectory = outDir;
+
+            Console.WriteLine(Directory.GetCurrentDirectory());
+
+            String currDir = Directory.GetCurrentDirectory();
 
             fileDialog.DefaultExt = ".csv";
             fileDialog.Filter = "CSV File |*.csv";
@@ -112,7 +138,7 @@ namespace ReadCVSWriteText.ViewModels {
                 if (File.Exists(fileDialog.FileName)) {
 
                     inCSVFile = fileDialog.FileName;
-                    outDir = Path.GetDirectoryName(_inCSVFile) + "\\";
+                    outDir = Path.GetDirectoryName(_inCSVFile);
                 }
             }
             else {
@@ -146,8 +172,8 @@ namespace ReadCVSWriteText.ViewModels {
                 _peopleData.add(people);
 
                 // Get ordered by Frequency descendin and name ascending
-                String freqNames = _peopleData.analyze(Analyzers.freq9to0NamesZtoA);
-                // Write freq9to0NamesZtoA to file
+                String freqNames = _peopleData.analyze(Analyzers.freq9to0NamesAtoZ);
+                // Write freq9to0NamesAtoZ to file
                 _writer.writeToFile(_outDir + "\\" + _outFileNames, freqNames);
 
                 // Get ordered by address ascending
@@ -163,7 +189,7 @@ namespace ReadCVSWriteText.ViewModels {
                 loadedFiles.Add(Path.GetFileName(_inCSVFile));
 
                 // Update read status
-                readOutCome = "Success!";
+                status = "Success!";
             }
             catch (Exception e) {
 
@@ -177,6 +203,14 @@ namespace ReadCVSWriteText.ViewModels {
 
             return File.Exists(inCSVFile) && Directory.Exists(outDir) &&
                 !String.IsNullOrEmpty(outFileNames) && !String.IsNullOrEmpty(outFileAddresses);
+        }
+
+        public void onclearData() {
+
+            loadedFiles.Clear();
+            freq9to0NamesAtoZ = "";
+            addressAtoZ0to9 = "";
+            status = "Click Run App!";
         }
         #endregion // Commands handlers
 
@@ -205,6 +239,14 @@ namespace ReadCVSWriteText.ViewModels {
                 return _runAppCmd ?? (
                   _runAppCmd = new RelayCommand(
                       onRunApp, canRunApp));
+            }
+        }
+        private ICommand _clearDataCmd;
+        public ICommand clearDataCmd {
+            get {
+                return _clearDataCmd ?? (
+                  _clearDataCmd = new RelayCommand(
+                      onclearData, () => loadedFiles.Count > 0));
             }
         }
         #endregion // Commands

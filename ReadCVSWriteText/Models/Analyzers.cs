@@ -12,7 +12,7 @@ namespace ReadCVSWriteText.Models {
         /// </summary>
         /// <param name="people">Persons to be analyzed</param>
         /// <returns></returns>
-        public static String freq9to0NamesZtoA(IEnumerable<Person> people) {
+        public static String freq9to0NamesAtoZ(IEnumerable<Person> people) {
 
             Dictionary<String, int> dictionary = new Dictionary<string, int>();
 

@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReadCVSWriteText"
+        xmlns:views="clr-namespace:ReadCVSWriteText.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="MainWindow" Height="700" Width="1200"  Background="#85C1E9">
+    <views:ReaderWriterV>
         
-    </Grid>
+    </views:ReaderWriterV>
 </Window>

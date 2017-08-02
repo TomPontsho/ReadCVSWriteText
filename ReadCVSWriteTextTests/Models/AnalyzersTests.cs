@@ -11,7 +11,7 @@ namespace ReadCVSWriteText.Models.Tests {
     [TestClass()]
     public class AnalyzersTests {
         [TestMethod()]
-        public void freq9to0NamesZtoATest() {
+        public void freq9to0NamesAtoZTest() {
 
             String name = "Matt";
             String surname = "Brown";
@@ -48,7 +48,7 @@ namespace ReadCVSWriteText.Models.Tests {
                                "Smith, 1" + Environment.NewLine +
                                "Tim, 1" + Environment.NewLine;
 
-            String actual = Analyzers.freq9to0NamesZtoA(new List<Person> { person1, person2, person3, person4 });
+            String actual = Analyzers.freq9to0NamesAtoZ(new List<Person> { person1, person2, person3, person4 });
 
             Assert.AreEqual(expected, actual);
         }

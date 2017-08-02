@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="ReadCVSWriteText.Views.ReaderWriterV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReadCVSWriteText.Views"
+             xmlns:vm="clr-namespace:ReadCVSWriteText.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="560" d:DesignWidth="1000">
+    <Grid Margin="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"  Margin="0,0,0,4" VerticalAlignment="Bottom"
+                   Text="Please select a CSV file to load: " FontWeight="Bold"/>
+        <Button Grid.Column="0" Grid.Row="1" Height="24" Width="98" HorizontalAlignment="Left"
+                Content="Select CSV File" Command="{Binding selectInputCSVCmd}"/>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" TextWrapping="Wrap"
+            Margin="8,0,0,0" Text="{Binding inCSVFile, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,0,0,4" 
+                   Text="Please select the output folder: " FontWeight="Bold"  VerticalAlignment="Bottom"/>
+        <Button Grid.Column="0" Grid.Row="3" Height="24" Width="98" HorizontalAlignment="Left"
+                Content="Select output Dir" Command="{Binding selectOutputDirCmd}"/>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" TextWrapping="Wrap"
+            Margin="8,0,0,0" Text="{Binding outDir, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" 
+                   Text="Names File: " FontWeight="Bold" VerticalAlignment="Center"/>
+        <local:NamingTextBox Grid.Column="1" Grid.Row="4" MinWidth="110" MaxWidth="110" 
+            TextWrapping="Wrap" Margin="8,8,0,8" Text="{Binding outFileNames,
+            UpdateSourceTrigger=PropertyChanged}" invalidCharacters="{x:Static 
+            vm:ReaderWriterVM.NAMINGINVALIDCHARS}"/>
+        <TextBlock Grid.Column="0" Grid.Row="5" 
+                   Text="Addresses File: " FontWeight="Bold" VerticalAlignment="Center"/>
+        <local:NamingTextBox Grid.Column="1" Grid.Row="5" MinWidth="110" MaxWidth="110" TextWrapping="Wrap"
+            Margin="8,8,0,8" Text="{Binding outFileAddresses, UpdateSourceTrigger=PropertyChanged}" 
+                            invalidCharacters="{x:Static vm:ReaderWriterVM.NAMINGINVALIDCHARS}"/>
+
+        <Border Grid.Column="2" Grid.Row="4" Grid.RowSpan="3" BorderThickness="2"
+                BorderBrush="#2874A6" Background="#3498DB" Margin="8,8,0,4">
+
+        </Border>
+        <Grid Grid.Column="0" Grid.Row="6" Margin="0,4">
+
+            <Button Height="24" Width="98" HorizontalAlignment="Right" Margin="0,10,0,0"
+                VerticalAlignment="Top" Content="Run App!" Command="{Binding runAppCmd}"/>
+            <Button  Height="24" Width="98" HorizontalAlignment="Left"
+                 VerticalAlignment="Bottom" Content="Clear Data" Command="{Binding clearDataCmd}"/>
+        </Grid>
+
+        <TextBlock Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" Foreground="#7B241C"
+                   Text="{Binding status}" FontWeight="Bold" VerticalAlignment="Center"/>
+
+        <Border Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" BorderThickness="2"
+                BorderBrush="#2874A6" Background="#3498DB" Margin="8,4,4,8">
+            
+        </Border>
+        <Border Grid.Column="3" Grid.Row="4" Grid.RowSpan="3" BorderThickness="2"
+                BorderBrush="#2874A6" Background="#3498DB" Margin="8,8,4,4">
+
+        </Border>
+    </Grid>
+</UserControl>
