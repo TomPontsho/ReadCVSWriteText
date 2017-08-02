@@ -100,7 +100,7 @@ namespace ReadCVSWriteText.Models.Tests {
             String phoneNumber = "0115986474";
             Person person = new Person(name, surname, address, phoneNumber);
 
-            PeopleData peopleData = new PeopleData(new List<Person> {person});
+            PeopleData peopleData = new PeopleData(new List<Person> { person });
 
             peopleData.clearData();
 

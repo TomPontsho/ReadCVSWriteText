@@ -118,7 +118,7 @@ namespace ReadCVSWriteText.ViewModels {
         #endregion // Public members
 
         #region Commnads handlers
-        public void onSelectInputCSV() {
+        private void onSelectInputCSV() {
 
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Multiselect = false;
@@ -146,7 +146,7 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
 
-        public void onSelectOutputDir() {
+        private void onSelectOutputDir() {
 
             using (var folderDialog = new FolderBrowserDialog()) { 
 
@@ -163,7 +163,7 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
 
-        public void onRunApp() {
+        private void onRunApp() {
 
             try {
                 // Read the CSV file
@@ -203,13 +203,13 @@ namespace ReadCVSWriteText.ViewModels {
             }
 
         }
-        public bool canRunApp() {
+        private bool canRunApp() {
 
             return File.Exists(inCSVFile) && Directory.Exists(outDir) &&
                 !String.IsNullOrEmpty(outFileNames) && !String.IsNullOrEmpty(outFileAddresses);
         }
 
-        public void onclearData() {
+        private void onclearData() {
 
             _peopleData.clearData();
             loadedFiles.Clear();
@@ -246,6 +246,7 @@ namespace ReadCVSWriteText.ViewModels {
                       onRunApp, canRunApp));
             }
         }
+
         private ICommand _clearDataCmd;
         public ICommand clearDataCmd {
             get {

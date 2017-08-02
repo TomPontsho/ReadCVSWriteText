@@ -76,7 +76,7 @@
                 BorderBrush="#2874A6" Background="#3498DB" Margin="8,4,4,8">
             <DockPanel LastChildFill="True">
                 <TextBlock DockPanel.Dock="Top" Margin="4"
-                   Text="Names, by frequency desc and name asc: " FontWeight="Bold" />
+                   Text="Names, by frequency descending and name ascending: " FontWeight="Bold" />
                 <ScrollViewer>
                     <TextBlock DockPanel.Dock="Top" Margin="4"
                        Text="{Binding freq9to0NamesAtoZ}" />
@@ -87,7 +87,7 @@
                 BorderBrush="#2874A6" Background="#3498DB" Margin="8,8,4,4">
             <DockPanel LastChildFill="True">
                 <TextBlock DockPanel.Dock="Top" Margin="4"
-                   Text="Addresses, by street name asc: " FontWeight="Bold" />
+                   Text="Addresses, by street name ascending: " FontWeight="Bold" />
                 <ScrollViewer>
                     <TextBlock DockPanel.Dock="Top" Margin="4"
                        Text="{Binding addressAtoZ0to9}" />
