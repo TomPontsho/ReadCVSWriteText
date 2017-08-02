@@ -14,7 +14,28 @@ namespace ReadCVSWriteText.Models {
         /// <returns></returns>
         public static String freq9to0NamesZtoA(IEnumerable<Person> people) {
 
-            throw new Exception("PeopleAnalyzer - Not implemented");
+            Dictionary<String, int> dictionary = new Dictionary<string, int>();
+
+            foreach(Person p in people) {
+
+                if (dictionary.ContainsKey(p.name))
+                    ++dictionary[p.name];
+                else
+                    dictionary.Add(p.name, 1);
+
+                if (dictionary.ContainsKey(p.surname))
+                    ++dictionary[p.surname];
+                else
+                    dictionary.Add(p.surname, 1);
+            }
+
+            dictionary.OrderBy(freq => freq.Value).ThenByDescending(name => name.Value);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var kv in dictionary)
+                stringBuilder.Append(kv.Key + ", " + kv.Value.ToString() + Environment.NewLine);
+
+            return stringBuilder.ToString();
         }
 
         /// <summary>
@@ -22,9 +43,21 @@ namespace ReadCVSWriteText.Models {
         /// </summary>
         /// <param name="people">Persons to be analyzed</param>
         /// <returns></returns>
-        public static String addressAtoZ(IEnumerable<Person> people) {
+        public static String addressAtoZ0to9(IEnumerable<Person> people) {
 
-            throw new Exception("PeopleAnalyzer - Not implemented");
+            List<Address> addresses = new List<Address>();
+
+            foreach (Person p in people)
+                addresses.Add(p.address);
+
+            // Street names with numbers last
+            addresses.OrderBy(addr => addr.streetName);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var addr in addresses)
+                stringBuilder.Append(addr.houseStreet + Environment.NewLine);
+
+            return stringBuilder.ToString();
         }
     }
 }

@@ -91,7 +91,7 @@ namespace ReadCVSWriteText.Models {
             }
         }
         public String houseStreet {
-            get { return this.streetName + " " + this.houseNumber; }
+            get { return this.houseNumber + " " + this.streetName; }
         }
         #endregion // Public members
     }

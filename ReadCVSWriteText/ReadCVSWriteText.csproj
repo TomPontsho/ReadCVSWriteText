@@ -68,6 +68,7 @@
     <Compile Include="Services\Logging\Logger.cs" />
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\BindableVM.cs" />
+    <Compile Include="ViewModels\ReaderWriterVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

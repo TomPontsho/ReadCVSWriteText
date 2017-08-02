@@ -67,7 +67,7 @@ namespace ReadCVSWriteText.Services.Logging {
 
             // No try-catch in Log, this must always work, else, it must
             // show the exception and not be silent
-            File.AppendAllText(_log_file, msg);
+            File.AppendAllText(_log_file, message);
 
             // Add to collection
             logs.Add(msg);
