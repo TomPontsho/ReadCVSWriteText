@@ -175,11 +175,15 @@ namespace ReadCVSWriteText.ViewModels {
                 String freqNames = _peopleData.analyze(Analyzers.freq9to0NamesAtoZ);
                 // Write freq9to0NamesAtoZ to file
                 _writer.writeToFile(_outDir + "\\" + _outFileNames, freqNames);
+                // Update view
+                freq9to0NamesAtoZ = freqNames;
 
                 // Get ordered by address ascending
                 String addresses = _peopleData.analyze(Analyzers.addressAtoZ0to9);
                 // Write addressAtoZ0to9 to file
                 _writer.writeToFile(_outDir + "\\" + _outFileAddresses, addresses);
+                // Update view
+                addressAtoZ0to9 = addresses;
 
                 // Log success
                 Logger.instance.log("ReaderWriterVM - Successfully loaded: '" + inCSVFile + "'.", 
@@ -207,6 +211,7 @@ namespace ReadCVSWriteText.ViewModels {
 
         public void onclearData() {
 
+            _peopleData.clearData();
             loadedFiles.Clear();
             freq9to0NamesAtoZ = "";
             addressAtoZ0to9 = "";
