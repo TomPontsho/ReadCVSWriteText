@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ReadCVSWriteText.Models {
-    public static class PeopleAnalyzer {
+    public static class Analyzers {
         /// <summary>
         /// Gets the frequency of the first and last names ordered by 
         /// frequency descending and then alphabetically ascending

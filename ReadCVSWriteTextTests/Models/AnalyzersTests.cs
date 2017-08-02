@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ReadCVSWriteText.Models.Tests {
     [TestClass()]
-    public class PeopleAnalyzerTests {
+    public class AnalyzersTests {
         [TestMethod()]
         public void freq9to0NamesZtoATest() {
 
@@ -48,7 +48,7 @@ namespace ReadCVSWriteText.Models.Tests {
                                "Smith, 1" + Environment.NewLine +
                                "Tim, 1" + Environment.NewLine;
 
-            String actual = PeopleAnalyzer.freq9to0NamesZtoA(new List<Person> { person1, person2, person3, person4 });
+            String actual = Analyzers.freq9to0NamesZtoA(new List<Person> { person1, person2, person3, person4 });
 
             Assert.AreEqual(expected, actual);
         }
@@ -88,7 +88,7 @@ namespace ReadCVSWriteText.Models.Tests {
                               "31 Clifton Rd" + Environment.NewLine +
                               "22 Jones Rd" + Environment.NewLine;
 
-            String actual = PeopleAnalyzer.addressAtoZ0to9(new List<Person> { person1, person2, person3, person4 });
+            String actual = Analyzers.addressAtoZ0to9(new List<Person> { person1, person2, person3, person4 });
 
             Assert.AreEqual(expected, actual);
         }

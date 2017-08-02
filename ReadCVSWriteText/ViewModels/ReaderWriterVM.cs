@@ -26,6 +26,8 @@ namespace ReadCVSWriteText.ViewModels {
         #endregion // Private members
 
         #region Public members
+        public static readonly string NAMINGINVALIDCHARS = "/:*?<>|\\\"";
+
         private String _inCSVFile = @"C:\Users\TMaheso\Documents\Visual Studio 2015\Projects\ReadCVSWriteText\ReadCVSWriteTextTests\bin\Debug\Resources\data.csv";
         public String inCSVFile {
             get { return _inCSVFile; }
@@ -144,12 +146,12 @@ namespace ReadCVSWriteText.ViewModels {
                 _peopleData.add(people);
 
                 // Get ordered by Frequency descendin and name ascending
-                String freqNames = _peopleData.analyze(PeopleAnalyzer.freq9to0NamesZtoA);
+                String freqNames = _peopleData.analyze(Analyzers.freq9to0NamesZtoA);
                 // Write freq9to0NamesZtoA to file
                 _writer.writeToFile(_outDir + "\\" + _outFileNames, freqNames);
 
                 // Get ordered by address ascending
-                String addresses = _peopleData.analyze(PeopleAnalyzer.addressAtoZ0to9);
+                String addresses = _peopleData.analyze(Analyzers.addressAtoZ0to9);
                 // Write addressAtoZ0to9 to file
                 _writer.writeToFile(_outDir + "\\" + _outFileAddresses, addresses);
 
