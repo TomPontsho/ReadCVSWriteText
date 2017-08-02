@@ -69,7 +69,6 @@
     <Compile Include="Services\Logging\Logger.cs" />
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\BindableVM.cs" />
-    <Compile Include="ViewModels\Constants.cs" />
     <Compile Include="ViewModels\ReaderWriterVM.cs" />
     <Compile Include="Views\ReaderWriterV.xaml.cs">
       <DependentUpon>ReaderWriterV.xaml</DependentUpon>
