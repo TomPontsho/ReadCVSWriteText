@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,7 @@ namespace ReadCVSWriteText.Services.Logging {
         #endregion // Private members
 
         #region Public members
+        public ObservableCollection<String> logs { get; set; } = new ObservableCollection<string>();
         public static Logger instance {
             get {
                 if (_instance == null)
@@ -60,11 +62,15 @@ namespace ReadCVSWriteText.Services.Logging {
 
         public void log(String message, Category category, Priority priority) {
 
-            String msg =  message + Environment.NewLine;
+            String msg = category.ToString("D") + " | " + priority.ToString("D")
+                + " | " + message + Environment.NewLine;
 
             // No try-catch in Log, this must always work, else, it must
             // show the exception and not be silent
             File.AppendAllText(_log_file, msg);
+
+            // Add to collection
+            logs.Add(msg);
         }
         #endregion // Public members
     }
