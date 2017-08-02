@@ -15,6 +15,8 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void readFromCSVTest() {
 
+            // Using defalt file, see if it exists
+
             ReadPeopleData reader = new ReadPeopleData();
             String randomFile = @"./Resources/data.csv";
 

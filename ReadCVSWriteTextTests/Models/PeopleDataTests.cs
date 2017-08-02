@@ -13,6 +13,7 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void hasDataTest() {
 
+            // Should be empty initially
             PeopleData peopleData = new PeopleData();
             bool expected = false;
 
@@ -23,6 +24,8 @@ namespace ReadCVSWriteText.Models.Tests {
 
         [TestMethod()]
         public void hasDataTest2() {
+
+            // Should have data once added
             PeopleData peopleData = new PeopleData();
 
             String name = "Pontsho";
@@ -44,6 +47,7 @@ namespace ReadCVSWriteText.Models.Tests {
         [ExpectedException(typeof(ArgumentNullException))]
         public void addTestNull() {
 
+            // Does not allow addition of null person
             PeopleData peopleData = new PeopleData();
 
             Person person = null;
@@ -54,6 +58,7 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void addTestCount() {
 
+            // Correct count of people as added
             PeopleData peopleData = new PeopleData();
 
             String name = "Pontsho";
@@ -75,6 +80,7 @@ namespace ReadCVSWriteText.Models.Tests {
         [ExpectedException(typeof(ArgumentNullException))]
         public void addTestNull2() {
 
+            // Even addition of a collection should not allow addition of a null Person
             PeopleData peopleData = new PeopleData();
 
             String name = "Pontsho";
@@ -93,7 +99,7 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void clearDataTest() {
 
-
+            // Clearing actually removes all added
             String name = "Pontsho";
             String surname = "Maheso";
             Address address = new Address("184 Van Der Valt St");

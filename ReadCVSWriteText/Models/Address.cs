@@ -7,10 +7,18 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ReadCVSWriteText.Models {
+
+    /// <summary>
+    /// A street address model. House number and street name.
+    /// </summary>
     public class Address {
 
         #region Constructor
         public Address () { }
+        /// <summary>
+        /// Creates a address based on a house number and street name
+        /// </summary>
+        /// <param name="address">The first space must seperate the house number and the street name</param>
         public Address(String address) {
 
             // Check for null address
@@ -30,7 +38,7 @@ namespace ReadCVSWriteText.Models {
             this.houseNumber = address.Substring(0, indexOfFirstSpace);
             this.streetName = address.Substring(indexOfFirstSpace + 1);
         }
-
+        
         public Address(String houseNumber, String streetName) {
 
             this.houseNumber = houseNumber;
@@ -50,6 +58,9 @@ namespace ReadCVSWriteText.Models {
         #endregion // Private members
 
         #region Public members
+        /// <summary>
+        /// First charactor must be a number, subsequent charators can be alphabets
+        /// </summary>
         public String houseNumber {
 
             get { return _houseNumber; }
@@ -90,6 +101,9 @@ namespace ReadCVSWriteText.Models {
                 this._streetName = value;
             }
         }
+        /// <summary>
+        /// House number and street name seperated by a space
+        /// </summary>
         public String houseStreet {
             get { return this.houseNumber + " " + this.streetName; }
         }

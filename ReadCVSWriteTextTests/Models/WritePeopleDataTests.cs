@@ -13,6 +13,8 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void writeToFileTest() {
 
+            // Write out a test file
+
             WritePeopleData writer = new WritePeopleData();
             string fileName = @".\Resources\testFile.txt";
             writer.writeToFile(fileName, "This is just a test file.");

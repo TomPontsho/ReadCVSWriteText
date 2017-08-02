@@ -8,12 +8,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ReadCVSWriteText.Models {
+
+    /// <summary>
+    /// A model for a person
+    /// </summary>
     public class Person {
 
         #region Constructors
 
         public Person() {
             
+            _address = new Address();
         }
         /// <summary>
         /// Ensures the model is always in a valid state. Throws ArgumentNullException and ArgumentException
@@ -44,6 +49,7 @@ namespace ReadCVSWriteText.Models {
         private readonly Regex _phoneRegex = new Regex(@"^[0-9]+$");
         private String _name;
         private String _surname;
+        private Address _address;
         private String _phoneNumber;
         #endregion // Private members
 
@@ -96,6 +102,9 @@ namespace ReadCVSWriteText.Models {
             }
         }
 
+        /// <summary>
+        /// The house number and street name seperated by a space
+        /// </summary>
         [CsvColumn(Name = "Address", FieldIndex = 3)]
         public String addressHouseStreet {
 
@@ -105,8 +114,24 @@ namespace ReadCVSWriteText.Models {
                 address = new Address(value);
             }
         }
-        public Address address { get; set; } = new Address();
+        /// <summary>
+        /// The model for the address, which is always equivalent to addressHouseStreet
+        /// </summary>
+        public Address address {
+            get { return _address; }
 
+            set {
+                // Check for null
+                if (value == null)
+                    throw new ArgumentNullException(nameof(address));
+
+                this._address = value;
+            }
+        }
+
+        /// <summary>
+        /// Must not contain any charactors other than digits
+        /// </summary>
         [CsvColumn(Name = "PhoneNumber", FieldIndex = 4)]
         public String phoneNumber {
 

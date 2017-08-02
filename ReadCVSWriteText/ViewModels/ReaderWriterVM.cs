@@ -13,6 +13,10 @@ using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace ReadCVSWriteText.ViewModels {
+
+    /// <summary>
+    /// The ViewModel, used by ReaderWriterV.
+    /// </summary>
     public class ReaderWriterVM : BindableVM {
 
         #region Constructor
@@ -35,6 +39,9 @@ namespace ReadCVSWriteText.ViewModels {
         public static readonly string NAMINGINVALIDCHARS = "/:*?<>|\\\"";
 
         private String _inCSVFile = "";
+        /// <summary>
+        /// The CSV file to read
+        /// </summary>
         public String inCSVFile {
             get { return _inCSVFile; }
             set {
@@ -45,6 +52,9 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
         private String _outDir = "";
+        /// <summary>
+        /// The directory to write to
+        /// </summary>
         public String outDir {
             get { return _outDir; }
             set {
@@ -55,6 +65,9 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
         private String _outFileNames = "names.txt";
+        /// <summary>
+        /// The name of the file storing names order by frequency descending, then name ascending
+        /// </summary>
         public String outFileNames {
             get { return _outFileNames; }
             set {
@@ -65,6 +78,9 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
         private String _outFileAddresses = "addresses.txt";
+        /// <summary>
+        /// The name of the file storing addresses order by street name ascending
+        /// </summary>
         public String outFileAddresses {
             get { return _outFileAddresses; }
             set {
@@ -75,6 +91,9 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
         private String _status = "Click Run App!";
+        /// <summary>
+        /// Indicated the status of the application
+        /// </summary>
         public String status {
             get { return _status; }
             set {
@@ -85,6 +104,9 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
         private ObservableCollection<String> _loadedFiles = new ObservableCollection<string>();
+        /// <summary>
+        /// Stores the names of the files the user has loaded so far
+        /// </summary>
         public ObservableCollection<String> loadedFiles {
             get { return _loadedFiles; }
             set {
@@ -96,6 +118,9 @@ namespace ReadCVSWriteText.ViewModels {
         }
 
         private String _freq9to0NamesAtoZ = "";
+        /// <summary>
+        /// The results for sorting users by name frequency descending, then name ascending
+        /// </summary>
         public String freq9to0NamesAtoZ {
             get { return _freq9to0NamesAtoZ; }
             set {
@@ -106,6 +131,9 @@ namespace ReadCVSWriteText.ViewModels {
             }
         }
         private String _addressAtoZ0to9 = "";
+        /// <summary>
+        /// The results for sorting addresses order by street name ascending
+        /// </summary>
         public String addressAtoZ0to9 {
             get { return _addressAtoZ0to9; }
             set {
@@ -239,6 +267,9 @@ namespace ReadCVSWriteText.ViewModels {
         }
 
         private ICommand _runAppCmd;
+        /// <summary>
+        /// Runs app. Loads user, analyzes then and then presents/stores
+        /// </summary>
         public ICommand runAppCmd {
             get {
                 return _runAppCmd ?? (
@@ -248,6 +279,10 @@ namespace ReadCVSWriteText.ViewModels {
         }
 
         private ICommand _clearDataCmd;
+        /// <summary>
+        /// Clear all the peoples, returns it how it was. 
+        /// Thought does not change directories and file names
+        /// </summary>
         public ICommand clearDataCmd {
             get {
                 return _clearDataCmd ?? (

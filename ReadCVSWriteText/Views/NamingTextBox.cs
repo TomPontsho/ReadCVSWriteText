@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace ReadCVSWriteText.Views {
+    /// <summary>
+    /// A textbox that does not allow charactors that can not be used to name a file/directory
+    /// </summary>
     public class NamingTextBox : TextBox {
 
         static NamingTextBox() {

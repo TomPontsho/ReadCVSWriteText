@@ -13,6 +13,7 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void freq9to0NamesAtoZTest() {
 
+            // Confirm if it analyzes correctly
             String name = "Matt";
             String surname = "Brown";
             Address address = new Address("31 Clifton Rd");
@@ -56,6 +57,7 @@ namespace ReadCVSWriteText.Models.Tests {
         [TestMethod()]
         public void addressAtoZTest() {
 
+            // Confirm if it analyzes correctly
             String name = "Matt";
             String surname = "Brown";
             Address address = new Address("31 Clifton Rd");

@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ReadCVSWriteText.Models {
+
+    /// <summary>
+    /// For reading data about people
+    /// </summary>
     public class ReadPeopleData {
 
         #region Constructors 
@@ -25,7 +29,11 @@ namespace ReadCVSWriteText.Models {
         private CsvContext _csvContext;
         private CsvFileDescription _inputFileDescription;
         #endregion // Private members
-
+        /// <summary>
+        /// Reads from the CSV file conforming to the structure of colums: FirstName,LastName,Address,PhoneNumber
+        /// </summary>
+        /// <param name="csvFile">The CSV file with structure: FirstName,LastName,Address,PhoneNumber</param>
+        /// <returns>A collection of people, with each person being of type Person</returns>
         #region Public members
         public IEnumerable<Person> readFromCSV(String csvFile) {
 
