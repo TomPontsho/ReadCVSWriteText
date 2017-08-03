@@ -1,0 +1,7 @@
+- Developed in Visual Studio 2015
+- Developed using WPF (C# and XAML)
+- Adopts the MVVM design pattern
+- MSUnit is used for unit testing (Run all tests from Test Explorer)
+- The project is on GitHup, name: TomPontsho/ReadCVSWriteText
+- GitHub git repository cloning: git clone https://github.com/TomPontsho/ReadCVSWriteText.git
+- The user can compile and start the application, then click bottom left "Run App!" button to read the CSV file and output text files as required
