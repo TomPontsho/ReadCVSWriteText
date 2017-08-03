@@ -150,7 +150,7 @@ namespace ReadCVSWriteText.ViewModels {
 
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Multiselect = false;
-            fileDialog.InitialDirectory = outDir;
+            fileDialog.InitialDirectory = Path.GetDirectoryName(inCSVFile);
 
             Console.WriteLine(Directory.GetCurrentDirectory());
 
